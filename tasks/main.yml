@@ -1,0 +1,34 @@
+---
+# tasks file for memoryleak.bash
+- name: Create PS1 file
+  copy:
+    content: "PS1={{ bash_ps1 }}"
+    dest: /etc/profile.d/ps1.sh
+  become: true
+  tags:
+    - copy
+    - bash
+    - ps1
+
+- name: Make sure alias file exists
+  copy:
+    dest: /etc/profile.d/alias.sh
+    content: "# memoryleak.bash generated aliases"
+  become: true
+  tags:
+    - file
+    - bash
+    - alias
+
+- name: Set aliases
+  lineinfile:
+    line: "alias {{ item.name + '=\"' + item.value }}\""
+    path: "/etc/profile.d/alias.sh"
+    regexp: "{{ '#?alias ' + item.name + '=(.*)?'}}"
+    state: present
+  become: true
+  tags:
+    - lininfile
+    - bash
+    - alias
+  with_items: "{{ bash_aliases }}"

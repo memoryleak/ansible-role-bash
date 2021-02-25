@@ -1,0 +1,8 @@
+---
+# defaults file for memoryleak.bash
+bash_ps1: |
+  "\[\e[32m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\]:[\[\e[35m\]\W\[\e[m\]]: "
+
+bash_aliases:
+  - name: mountt
+    value: "mount | column -t"

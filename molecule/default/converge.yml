@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include memoryleak.bash"
+      include_role:
+        name: "memoryleak.bash"
