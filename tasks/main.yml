@@ -1,5 +1,13 @@
 ---
 # tasks file for memoryleak.bash
+- name: Make sure /etc/profile.d exists
+  file:
+    path: /etc/profile.d
+    state: directory
+  tags:
+    - file
+    - bash
+
 - name: Create PS1 file
   copy:
     content: "PS1={{ bash_ps1 }}"
